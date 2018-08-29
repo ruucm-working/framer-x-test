@@ -34,7 +34,7 @@ const StyledFrame = styled(Frame)`
     props.isShowing &&
     css`
       ${MainImg} {
-        width: 100vw;
+        width: 100%;
       }
     `};
 `
