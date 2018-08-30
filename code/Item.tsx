@@ -21,7 +21,13 @@ import { log } from 'ruucm-util'
 
 const Wrap = styled.div`
   position: relative;
-  ${props => props.isShowing && css``};
+  ${props =>
+    props.isShowing &&
+    css`
+      ${MainImg} {
+        border-radius: 0;
+      }
+    `};
 `
 const Label = styled.div``
 const Title = styled.div``
@@ -30,19 +36,18 @@ const StyledFrame = styled(Frame)`
   top: 0;
   z-index: -1;
   width: 100% !important;
-  ${props =>
-    props.isShowing &&
-    css`
-      ${MainImg} {
-        width: 100%;
-      }
-    `};
 `
-const MainImg = styled.div`
-  width: 80vw;
-  height: 400px;
+const MainImg = styled(Frame)`
+  position: relative !important;
   margin: 0 auto;
+  transform: none !important;
   border-radius: 20px;
+  -moz-transition: border-radius 2s;
+  -o-transition: border-radius 2s;
+  -webkit-transition: border-radius 2s;
+  transition: border-radius 2s;
+
+  height: 400px !important;
   padding: 25px;
   ${props =>
     props.src &&
@@ -50,6 +55,7 @@ const MainImg = styled.div`
       background: center / cover no-repeat url(${props.src});
     `};
 `
+
 const Desc = styled.div`
   background: white;
 `
@@ -86,29 +92,42 @@ export class Item extends React.Component<Props> {
     mainImg: { type: ControlType.String, title: 'Main Image' },
     desc: { type: ControlType.String, title: 'Description' },
   }
+  screenWidth = 375
   top = Animatable(0)
   left = Animatable(0)
   scale = Animatable(1)
   opacity = Animatable(0)
+  width = Animatable(this.screenWidth * 0.8)
+
+  // componentDidMount() {
+  //   log('window.screen', window.screen)
+  //   log('screen', screen)
+  //   log('screen.width * 0.8', screen.width * 0.8)
+  // }
+
+  shrink = async () => {
+    animate(this.width, this.screenWidth * 0.76).finished
+  }
 
   showDetail = async () => {
-    await animate(this.top, -100).finished
-    await animate(this.scale, 2).finished
+    animate(this.top, -100).finished
+    animate(this.width, this.screenWidth * 1).finished
     this.setState({ show: true })
-    await animate(this.opacity, 1).finished
+    animate(this.opacity, 1).finished
   }
   closeDetail = async () => {
-    await animate(this.opacity, 0).finished
+    animate(this.opacity, 0).finished
     this.setState({ show: false })
-    await animate(this.scale, 1).finished
-    await animate(this.top, 0).finished
+    animate(this.top, 0).finished
+    animate(this.width, this.screenWidth * 0.8).finished
   }
 
   render() {
     return (
       <Wrap
         isShowing={this.state.show}
-        onClick={this.state.show ? void 0 : this.showDetail}
+        onMouseUp={this.state.show ? void 0 : this.showDetail}
+        onMouseDown={this.state.show ? void 0 : this.shrink}
       >
         {this.state.show ? (
           <CloseButton onClick={this.closeDetail}>close</CloseButton>
@@ -117,7 +136,7 @@ export class Item extends React.Component<Props> {
         )}
 
         <StyledFrame top={this.top} isShowing={this.state.show}>
-          <MainImg src={this.props.mainImg}>
+          <MainImg width={this.width} src={this.props.mainImg}>
             <Label>{this.props.label}</Label>
             <Title
               dangerouslySetInnerHTML={{
@@ -125,15 +144,14 @@ export class Item extends React.Component<Props> {
               }}
             />
           </MainImg>
+          {this.state.show ? (
+            <Frame opacity={this.opacity}>
+              <Desc>{this.props.desc}</Desc>
+            </Frame>
+          ) : (
+            ''
+          )}
         </StyledFrame>
-
-        {this.state.show ? (
-          <Frame opacity={this.opacity}>
-            <Desc>{this.props.desc}</Desc>
-          </Frame>
-        ) : (
-          ''
-        )}
       </Wrap>
     )
   }

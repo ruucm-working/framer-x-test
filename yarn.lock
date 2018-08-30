@@ -15,6 +15,10 @@
   version "1.0.0"
   resolved "https://registry.framer.com/@framer/edoardo.web-ui-kit/-/@framer/edoardo.web-ui-kit-1.0.0.tgz#aa7c201cb231d6e9285edf8197389b5d90be6ee8"
 
+"@framer/framer.device-skin-apple-iphone8-gold@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.framer.com/@framer/framer.device-skin-apple-iphone8-gold/-/@framer/framer.device-skin-apple-iphone8-gold-1.0.0.tgz#698d4b10e247e66d849e0ba5df0c457dc14cea0b"
+
 "@framer/framer.examples@^1.4.0":
   version "1.4.0"
   resolved "https://registry.framer.com/@framer/framer.examples/-/@framer/framer.examples-1.4.0.tgz#e259c25148cd9f7b1ead0e723dcbfc440f93b7d9"

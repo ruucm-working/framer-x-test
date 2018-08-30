@@ -2,6 +2,7 @@
 	"main": "build/index.js",
 	"license": "MIT",
 	"devDependencies": {
+		"@framer/framer.device-skin-apple-iphone8-gold": "^1.0.0",
 		"@types/react": "^16.0.31",
 		"framer": "^0.7.5"
 	},
