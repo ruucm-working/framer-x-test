@@ -27,14 +27,25 @@ export class Trigger extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Trigger',
+    type: 'play',
   }
 
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
+    type: {
+      type: ControlType.Enum,
+      options: ['play', 'reverse'],
+      optionTitles: ['Play', 'Reverse'],
+      title: 'Type',
+    },
   }
 
   render() {
-    return <TriggerFrame onTap={this.props.onTap}>{this.props.text}</TriggerFrame>
+    return (
+      <TriggerFrame onTap={() => this.props.onTap(this.props.type)}>
+        {this.props.type}
+      </TriggerFrame>
+    )
   }
 }

@@ -62,12 +62,22 @@ export class Animate extends React.Component<Props> {
         tension: this.props.tension,
         friction: this.props.friction,
       }
+      if (nextProps.playing) {
+        log('play!')
 
-      const left = this.props.left
-      const top = this.props.top
-      const scale = this.props.scale
+        const left = this.props.left
+        const top = this.props.top
+        const scale = this.props.scale
 
-      animate.spring(this.switch, { left, top, scale }, springOptions)
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      } else {
+        log('reverse!')
+
+        const left = 0
+        const top = 0
+        const scale = 1
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      }
     }
   }
 
