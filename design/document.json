@@ -6057,11 +6057,12 @@
             "codeComponentProps" : {
               "children" : null,
               "friction" : 40,
-              "left" : 0,
+              "left" : 50,
               "placeholders" : null,
-              "scale" : 2,
+              "scale" : 1,
               "tension" : 100,
-              "text" : "Animate"
+              "text" : "Animate",
+              "top" : 50
             },
             "codeOverrideFile" : ".\/AppTest.ts",
             "codeOverrideIdentifier" : ".\/AppTest.ts_Animate",
@@ -6156,7 +6157,8 @@
               "placeholders" : null,
               "scale" : 1,
               "tension" : 200,
-              "text" : "Animate"
+              "text" : "Animate",
+              "top" : 50
             },
             "codeOverrideFile" : ".\/AppTest.ts",
             "codeOverrideIdentifier" : ".\/AppTest.ts_Animate",
