@@ -2,9 +2,20 @@ import * as React from 'react'
 import { PropertyControls, ControlType } from 'framer'
 import styled from 'styled-components'
 
-const Wrap = styled.div``
-const Label = styled.div``
-const Title = styled.div``
+const Wrap = styled.div`
+  padding: 35px 16px 30px 16px;
+`
+const Label = styled.div`
+  color: #908f94;
+  font-size: 13px;
+  font-family: Helvetica;
+  margin-bottom: 5px;
+`
+const Title = styled.div`
+  font-size: 30px;
+  font-family: Helvetica;
+  font-weight: 900;
+`
 
 // Define type of property
 interface Props {

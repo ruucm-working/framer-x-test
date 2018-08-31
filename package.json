@@ -16,9 +16,8 @@
 	},
 	"author": ". ruucm",
 	"dependencies": {
-		"@framer/colebemis.feather-icons": "^1.2.0",
-		"@framer/edoardo.web-ui-kit": "^1.0.0",
 		"@framer/framer.examples": "^1.4.0",
+		"@framer/koenbok.signature": "^1.4.0",
 		"react-redux": "^5.0.7",
 		"reselect": "^3.0.1",
 		"ruucm-blocks": "https://github.com/ruucm/ruucm-blocks",

@@ -28,9 +28,29 @@ const Wrap = styled.div`
         border-radius: 0;
       }
     `};
+  ${props =>
+    props.focused &&
+    css`
+      ${MainImg} {
+        height: 700px !important;
+      }
+    `};
 `
-const Label = styled.div``
-const Title = styled.div``
+const Label = styled.div`
+  font-family: Helvetica;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 12px;
+`
+
+const Title = styled.div`
+  font-family: Helvetica;
+  color: white;
+  font-size: 25px;
+  font-weight: 900;
+`
+
 const StyledFrame = styled(Frame)`
   position: absolute;
   top: 0;
@@ -97,12 +117,12 @@ export class Item extends React.Component<Props> {
   left = Animatable(0)
   scale = Animatable(1)
   opacity = Animatable(0)
-  width = Animatable(this.screenWidth * 0.8)
+  width = Animatable(this.screenWidth * 0.9)
 
   // componentDidMount() {
   //   log('window.screen', window.screen)
   //   log('screen', screen)
-  //   log('screen.width * 0.8', screen.width * 0.8)
+  //   log('screen.width * 0.9', screen.width * 0.9)
   // }
 
   shrink = async () => {
@@ -119,23 +139,24 @@ export class Item extends React.Component<Props> {
     animate(this.opacity, 0).finished
     this.setState({ show: false })
     animate(this.top, 0).finished
-    animate(this.width, this.screenWidth * 0.8).finished
+    animate(this.width, this.screenWidth * 0.9).finished
   }
 
   render() {
     return (
       <Wrap
-        isShowing={this.state.show}
-        onMouseUp={this.state.show ? void 0 : this.showDetail}
-        onMouseDown={this.state.show ? void 0 : this.shrink}
+        isShowing={this.props.show}
+        onMouseUp={this.props.show ? void 0 : this.showDetail}
+        onMouseDown={this.props.show ? void 0 : this.shrink}
       >
-        {this.state.show ? (
+        {log('this.props(Item)', this.props)}
+        {this.props.show ? (
           <CloseButton onClick={this.closeDetail}>close</CloseButton>
         ) : (
           ''
         )}
 
-        <StyledFrame top={this.top} isShowing={this.state.show}>
+        <StyledFrame top={this.top} isShowing={this.props.show}>
           <MainImg width={this.width} src={this.props.mainImg}>
             <Label>{this.props.label}</Label>
             <Title
@@ -144,7 +165,7 @@ export class Item extends React.Component<Props> {
               }}
             />
           </MainImg>
-          {this.state.show ? (
+          {this.props.show ? (
             <Frame opacity={this.opacity}>
               <Desc>{this.props.desc}</Desc>
             </Frame>
