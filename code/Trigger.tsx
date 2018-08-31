@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PropertyControls, ControlType, Frame } from 'framer'
 import styled, { css } from 'styled-components'
 
-const BasicFrame = styled(Frame)`
+const TriggerFrame = styled(Frame)`
   position: absolute;
   top: 0;
   z-index: -1;
@@ -35,6 +35,6 @@ export class Trigger extends React.Component<Props> {
   }
 
   render() {
-    return <BasicFrame onTap={this.props.onTap}>{this.props.text}</BasicFrame>
+    return <TriggerFrame onTap={this.props.onTap}>{this.props.text}</TriggerFrame>
   }
 }

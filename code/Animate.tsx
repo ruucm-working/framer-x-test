@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   PropertyControls,
+  PropertyStore,
   ControlType,
   Frame,
   Animatable,
@@ -9,7 +10,7 @@ import {
 import styled, { css } from 'styled-components'
 import { log } from 'ruucm-util'
 
-const BasicFrame = styled(Frame)`
+const AnimateFrame = styled(Frame)`
   position: absolute;
   top: 0;
   z-index: -1;
@@ -34,26 +35,48 @@ export class Animate extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Animate',
+    left: 100,
+    scale: 2.6,
+    tension: 500,
+    friction: 100,
+    children: null,
   }
-  scale = Animatable(1)
+
+  switch = PropertyStore({ left: 0, scale: 1 }, true)
 
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
+    left: { type: ControlType.Number, title: 'Left' },
+    scale: { type: ControlType.Number, title: 'Scale' },
+    tension: { type: ControlType.Number, title: 'Tension' },
+    friction: { type: ControlType.Number, title: 'Friction' },
+    children: { type: ControlType.Children, title: 'Children' },
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.playing !== this.props.playing) {
-      this.scale.set(0.6)
-      animate.spring(this.scale, 1)
+      const springOptions = {
+        tension: this.props.tension,
+        friction: this.props.friction,
+      }
+
+      const left = this.props.left
+      const scale = this.props.scale
+
+      animate.spring(this.switch, { left, scale }, springOptions)
     }
   }
 
   render() {
     return (
-      <BasicFrame onTap={this.props.onTap} scale={this.scale}>
+      <AnimateFrame
+        onTap={this.props.onTap}
+        scale={this.switch.scale}
+        left={this.switch.left}
+      >
         {this.props.text}
-      </BasicFrame>
+      </AnimateFrame>
     )
   }
 }
