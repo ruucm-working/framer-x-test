@@ -11,19 +11,17 @@ import styled, { css } from 'styled-components'
 import { log } from 'ruucm-util'
 
 const AnimateFrame = styled(Frame)`
-  position: absolute;
-  top: 0;
-  z-index: -1;
   width: 100% !important;
   height: 100% !important;
 
   color: sandybrown;
-  background: rgba(244, 164, 96, 0.6) !important;
+  display: block !important;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  ${props =>
+    props.bg &&
+    css`
+      background: ${props.bg} !important;
+    `};
 `
 
 // Define type of property
@@ -35,6 +33,7 @@ export class Animate extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Animate',
+    bg: 'rgba(244, 164, 96, 0.6)',
     left: 50,
     top: 50,
     scale: 2,
@@ -48,6 +47,7 @@ export class Animate extends React.Component<Props> {
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
+    bg: { type: ControlType.Color, title: 'Background' },
     left: { type: ControlType.Number, title: 'X (From Left)' },
     top: { type: ControlType.Number, title: 'Y (From Top)' },
     scale: { type: ControlType.Number, title: 'Scale' },
@@ -84,12 +84,23 @@ export class Animate extends React.Component<Props> {
   render() {
     return (
       <AnimateFrame
+        bg={this.props.bg}
         onTap={this.props.onTap}
         scale={this.switch.scale}
         left={this.switch.left}
         top={this.switch.top}
+        style={{
+          display: 'block',
+        }}
       >
         {this.props.text}
+        {React.Children.map(this.props.children, child => {
+          // let newChildProps = {
+          //   playing: this.props.playing,
+          //   width: this.props.width,
+          // }
+          return React.cloneElement(child)
+        })}
       </AnimateFrame>
     )
   }

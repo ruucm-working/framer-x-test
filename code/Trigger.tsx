@@ -27,24 +27,47 @@ export class Trigger extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Trigger',
-    type: 'play',
+    playType: 'play',
+    triggerType: 'onTap',
   }
 
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
-    type: {
+    playType: {
       type: ControlType.Enum,
       options: ['play', 'reverse'],
       optionTitles: ['Play', 'Reverse'],
-      title: 'Type',
+      title: 'Play Type',
+    },
+    triggerType: {
+      type: ControlType.Enum,
+      options: ['onTap', 'onMouseDown', 'onMouseUp'],
+      optionTitles: ['onTap', 'onMouseDown', 'onMouseUp'],
+      title: 'Trigger Type',
     },
   }
 
   render() {
     return (
-      <TriggerFrame onTap={() => this.props.onTap(this.props.type)}>
-        {this.props.type}
+      <TriggerFrame
+        onTap={() =>
+          this.props.triggerType == 'onTap'
+            ? this.props.trigger(this.props.playType)
+            : void 0
+        }
+        onMouseDown={() =>
+          this.props.triggerType == 'onMouseDown'
+            ? this.props.trigger(this.props.playType)
+            : void 0
+        }
+        onMouseUp={() =>
+          this.props.triggerType == 'onMouseUp'
+            ? this.props.trigger(this.props.playType)
+            : void 0
+        }
+      >
+        {this.props.playType}
       </TriggerFrame>
     )
   }

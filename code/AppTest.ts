@@ -24,9 +24,9 @@ export const Scale: Override = () => {
   }
 }
 
-export const makeScale: Override = () => {
+export const Trigger: Override = () => {
   return {
-    onTap(type) {
+    trigger(type) {
       if (type == 'play') data.playing = true
       else if (type == 'reverse') data.playing = false
     },
