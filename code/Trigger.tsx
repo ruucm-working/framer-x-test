@@ -3,9 +3,6 @@ import { PropertyControls, ControlType, Frame } from 'framer'
 import styled, { css } from 'styled-components'
 
 const TriggerFrame = styled(Frame)`
-  position: absolute;
-  top: 0;
-  z-index: -1;
   width: 100% !important;
   height: 100% !important;
 
@@ -16,6 +13,12 @@ const TriggerFrame = styled(Frame)`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  ${props =>
+    !props.visibility &&
+    css`
+      opacity: 0.3;
+    `};
 `
 
 // Define type of property
@@ -28,7 +31,11 @@ export class Trigger extends React.Component<Props> {
   static defaultProps = {
     text: 'Trigger',
     playType: 'play',
-    triggerType: 'onTap',
+    // triggerType: 'onTap',
+    onTapTrigger: true,
+    onMouseDownTrigger: false,
+    onMouseUpTrigger: false,
+    visibility: false,
   }
 
   // Items shown in property panel
@@ -40,11 +47,21 @@ export class Trigger extends React.Component<Props> {
       optionTitles: ['Play', 'Reverse'],
       title: 'Play Type',
     },
-    triggerType: {
-      type: ControlType.Enum,
-      options: ['onTap', 'onMouseDown', 'onMouseUp'],
-      optionTitles: ['onTap', 'onMouseDown', 'onMouseUp'],
-      title: 'Trigger Type',
+    // triggerType: {
+    //   type: ControlType.Enum,
+    //   options: ['onTap', 'onMouseDown', 'onMouseUp'],
+    //   optionTitles: ['onTap', 'onMouseDown', 'onMouseUp'],
+    //   title: 'Trigger Type',
+    // },
+    onTapTrigger: { type: ControlType.Boolean, title: 'onTap Trigger' },
+    onMouseDownTrigger: {
+      type: ControlType.Boolean,
+      title: 'onMouseDown Trigger',
+    },
+    onMouseUpTrigger: { type: ControlType.Boolean, title: 'onMouseUp Trigger' },
+    visibility: {
+      type: ControlType.Boolean,
+      title: 'Visibility',
     },
   }
 
@@ -52,20 +69,21 @@ export class Trigger extends React.Component<Props> {
     return (
       <TriggerFrame
         onTap={() =>
-          this.props.triggerType == 'onTap'
-            ? this.props.trigger(this.props.playType)
+          this.props.onTapTrigger
+            ? this.props.onTap(this.props.playType)
             : void 0
         }
         onMouseDown={() =>
-          this.props.triggerType == 'onMouseDown'
-            ? this.props.trigger(this.props.playType)
+          this.props.onMouseDownTrigger
+            ? this.props.onMouseDown(this.props.playType)
             : void 0
         }
         onMouseUp={() =>
-          this.props.triggerType == 'onMouseUp'
-            ? this.props.trigger(this.props.playType)
+          this.props.onMouseUpTrigger
+            ? this.props.onMouseUp(this.props.playType)
             : void 0
         }
+        visibility={this.props.visibility}
       >
         {this.props.playType}
       </TriggerFrame>

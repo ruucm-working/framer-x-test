@@ -57,6 +57,8 @@ export class Animate extends React.Component<Props> {
   }
 
   componentWillReceiveProps(nextProps) {
+    log('nextProps', nextProps)
+    log(' this.props', this.props)
     if (nextProps.playing !== this.props.playing) {
       const springOptions = {
         tension: this.props.tension,
@@ -64,6 +66,30 @@ export class Animate extends React.Component<Props> {
       }
       if (nextProps.playing) {
         log('play!')
+
+        const left = this.props.left
+        const top = this.props.top
+        const scale = this.props.scale
+
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      } else {
+        log('reverse!')
+
+        const left = 0
+        const top = 0
+        const scale = 1
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      }
+    }
+
+    // Play onTap Animation
+    if (nextProps.playingOnTap !== this.props.playingOnTap) {
+      const springOptions = {
+        tension: this.props.tension,
+        friction: this.props.friction,
+      }
+      if (nextProps.playingOnTap) {
+        log('play playingOnTap!')
 
         const left = this.props.left
         const top = this.props.top

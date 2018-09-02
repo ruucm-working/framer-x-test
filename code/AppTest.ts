@@ -1,16 +1,21 @@
 import { Data, animate, Override, Animatable } from 'framer'
+import { log } from 'ruucm-util'
 
 const data = Data({
   toggle: true,
   scale: Animatable(1),
   opacity: Animatable(1),
   rotation: Animatable(0),
-  playing: false,
+  playingOnTap: false,
+  playingOnMouseDown: false,
+  playingOnMouseUp: false,
 })
 
 export const Animate: Override = () => {
   return {
-    playing: data.playing,
+    playingOnTap: data.playingOnTap,
+    playingOnMouseDown: data.playingOnMouseDown,
+    playingOnMouseUp: data.playingOnMouseUp,
   }
 }
 
@@ -26,9 +31,18 @@ export const Scale: Override = () => {
 
 export const Trigger: Override = () => {
   return {
-    trigger(type) {
-      if (type == 'play') data.playing = true
-      else if (type == 'reverse') data.playing = false
+    onTap(type) {
+      log('onTap')
+      if (type == 'play') data.playingOnTap = true
+      else if (type == 'reverse') data.playingOnTap = false
+    },
+    onMouseDown(type) {
+      if (type == 'play') data.playingOnMouseDown = true
+      else if (type == 'reverse') data.playingOnMouseDown = false
+    },
+    onMouseUp(type) {
+      if (type == 'play') data.playingOnMouseUp = true
+      else if (type == 'reverse') data.playingOnMouseUp = false
     },
   }
 }

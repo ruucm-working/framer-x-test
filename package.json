@@ -17,7 +17,9 @@
 	"author": ". ruucm",
 	"dependencies": {
 		"@framer/framer.examples": "^1.4.0",
+		"@framer/jacopomoretto.carousel": "^1.10.0",
 		"@framer/koenbok.signature": "^1.4.0",
+		"nuka-carousel": "^4.3.7",
 		"react-redux": "^5.0.7",
 		"reselect": "^3.0.1",
 		"ruucm-blocks": "https://github.com/ruucm/ruucm-blocks",
