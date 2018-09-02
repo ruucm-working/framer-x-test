@@ -41,7 +41,7 @@ export class Trigger extends React.Component<Props> {
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
     playType: {
-      type: ControlType.Enum,
+      type: ControlType.SegmentedEnum,
       options: ['play', 'reverse', 'toggle'],
       optionTitles: ['Play', 'Reverse', 'Toggle'],
       title: 'Play Type',
