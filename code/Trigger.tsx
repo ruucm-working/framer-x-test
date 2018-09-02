@@ -31,7 +31,6 @@ export class Trigger extends React.Component<Props> {
   static defaultProps = {
     text: 'Trigger',
     playType: 'play',
-    // triggerType: 'onTap',
     onTapTrigger: true,
     onMouseDownTrigger: false,
     onMouseUpTrigger: false,
@@ -43,16 +42,10 @@ export class Trigger extends React.Component<Props> {
     text: { type: ControlType.String, title: 'Text' },
     playType: {
       type: ControlType.Enum,
-      options: ['play', 'reverse'],
-      optionTitles: ['Play', 'Reverse'],
+      options: ['play', 'reverse', 'toggle'],
+      optionTitles: ['Play', 'Reverse', 'Toggle'],
       title: 'Play Type',
     },
-    // triggerType: {
-    //   type: ControlType.Enum,
-    //   options: ['onTap', 'onMouseDown', 'onMouseUp'],
-    //   optionTitles: ['onTap', 'onMouseDown', 'onMouseUp'],
-    //   title: 'Trigger Type',
-    // },
     onTapTrigger: { type: ControlType.Boolean, title: 'onTap Trigger' },
     onMouseDownTrigger: {
       type: ControlType.Boolean,
