@@ -9071,7 +9071,7 @@
           "onMouseUpTrigger" : false,
           "onTapTrigger" : true,
           "placeholders" : null,
-          "playType" : "play",
+          "playType" : "toggle",
           "text" : "Trigger",
           "visibility" : true
         },

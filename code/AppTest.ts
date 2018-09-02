@@ -25,14 +25,18 @@ export const Trigger: Override = () => {
       log('onTap')
       if (type == 'play') data.playingOnTap = true
       else if (type == 'reverse') data.playingOnTap = false
+      else if (type == 'toggle') data.playingOnTap = !data.playingOnTap
     },
     onMouseDown(type) {
       if (type == 'play') data.playingOnMouseDown = true
       else if (type == 'reverse') data.playingOnMouseDown = false
+      else if (type == 'toggle')
+        data.playingOnMouseDown = !data.playingOnMouseDown
     },
     onMouseUp(type) {
       if (type == 'play') data.playingOnMouseUp = true
       else if (type == 'reverse') data.playingOnMouseUp = false
+      else if (type == 'toggle') data.playingOnMouseUp = !data.playingOnMouseUp
     },
   }
 }
