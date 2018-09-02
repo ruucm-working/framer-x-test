@@ -16,12 +16,16 @@ const AnimateFrame = styled(Frame)`
 
   color: sandybrown;
   display: block !important;
-
-  ${props =>
-    props.bg &&
-    css`
-      background: ${props.bg} !important;
-    `};
+  background: rgba(244, 164, 96, 0.6) !important;
+`
+const Label = styled.div`
+  position: absolute;
+  top: 0;
+  z-index: 1;
+`
+const Child = styled.div`
+  position: absolute;
+  top: 0;
 `
 
 // Define type of property
@@ -33,19 +37,18 @@ export class Animate extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Animate',
-    bg: 'rgba(244, 164, 96, 0.6)',
 
     onTapLeft: 50,
     onTapTop: 50,
-    onTapScale: 2,
+    onTapScale: 150,
 
     onMDLeft: 50,
     onMDTop: 50,
-    onMDScale: 2,
+    onMDScale: 150,
 
     onMULeft: 50,
     onMUTop: 50,
-    onMUScale: 2,
+    onMUScale: 150,
 
     tension: 500,
     friction: 100,
@@ -57,7 +60,6 @@ export class Animate extends React.Component<Props> {
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
-    bg: { type: ControlType.Color, title: 'Background' },
 
     onTapLeft: { type: ControlType.Number, title: 'onTap X' },
     onTapTop: { type: ControlType.Number, title: 'onTap Y' },
@@ -88,7 +90,7 @@ export class Animate extends React.Component<Props> {
 
         left = this.props.onTapLeft
         top = this.props.onTapTop
-        scale = this.props.onTapScale
+        scale = this.props.onTapScale / 100
 
         animate.spring(this.switch, { left, top, scale }, springOptions)
       } else {
@@ -114,7 +116,7 @@ export class Animate extends React.Component<Props> {
 
         left = this.props.onMDLeft
         top = this.props.onMDTop
-        scale = this.props.onMDScale
+        scale = this.props.onMDScale / 100
 
         animate.spring(this.switch, { left, top, scale }, springOptions)
       } else {
@@ -140,7 +142,7 @@ export class Animate extends React.Component<Props> {
 
         left = this.props.onMULeft
         top = this.props.onMUTop
-        scale = this.props.onMUScale
+        scale = this.props.onMUScale / 100
 
         animate.spring(this.switch, { left, top, scale }, springOptions)
       } else {
@@ -165,14 +167,16 @@ export class Animate extends React.Component<Props> {
           display: 'block',
         }}
       >
-        {this.props.text}
-        {React.Children.map(this.props.children, child => {
-          // let newChildProps = {
-          //   playing: this.props.playing,
-          //   width: this.props.width,
-          // }
-          return React.cloneElement(child)
-        })}
+        <Label>{this.props.text}</Label>
+        <Child>
+          {React.Children.map(this.props.children, child => {
+            // let newChildProps = {
+            //   playing: this.props.playing,
+            //   width: this.props.width,
+            // }
+            return React.cloneElement(child)
+          })}
+        </Child>
       </AnimateFrame>
     )
   }

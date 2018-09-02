@@ -30,11 +30,11 @@ export class Trigger extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Trigger',
-    playType: 'play',
+    playType: 'toggle',
     onTapTrigger: true,
     onMouseDownTrigger: false,
     onMouseUpTrigger: false,
-    visibility: false,
+    visibility: true,
   }
 
   // Items shown in property panel
