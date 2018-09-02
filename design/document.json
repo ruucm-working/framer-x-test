@@ -8427,7 +8427,7 @@
             "brightness" : 100,
             "brightnessEnabled" : 0,
             "centerAnchorX" : 0.5,
-            "centerAnchorY" : 0.40404797601199399,
+            "centerAnchorY" : 0.35157421289355323,
             "children" : [
 
             ],
@@ -8472,7 +8472,7 @@
             "fillType" : "color",
             "grayscale" : 0,
             "grayScaleEnabled" : 0,
-            "height" : 449,
+            "height" : 379,
             "heightType" : 0,
             "hueRotate" : 0,
             "hueRotateEnabled" : 0,

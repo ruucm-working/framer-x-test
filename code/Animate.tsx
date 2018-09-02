@@ -26,6 +26,8 @@ const Label = styled.div`
 const ChildFrame = styled(Frame)`
   left: 50%;
   transform: translateX(-50%) !important;
+  /* Don't want to animate height yet */
+  height: 100% !important;
 `
 
 // Define type of property
@@ -75,7 +77,11 @@ export class Animate extends React.Component<Props> {
   }
 
   switch = PropertyStore(
-    { left: 0, top: 0, width: screenWidth * (this.props.firstWidth / 100) },
+    {
+      left: 0,
+      top: 0,
+      width: screenWidth * (this.props.firstWidth / 100),
+    },
     true
   )
 
@@ -175,7 +181,7 @@ export class Animate extends React.Component<Props> {
         }}
       >
         <Label>{this.props.text}</Label>
-        <ChildFrame width={this.switch.width} height={400}>
+        <ChildFrame width={this.switch.width}>
           {React.Children.map(this.props.children, child => {
             // let newChildProps = {
             //   playing: this.props.playing,
