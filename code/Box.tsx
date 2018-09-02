@@ -111,8 +111,7 @@ export class Box extends React.Component<Props> {
   static defaultProps = {
     title: '',
     label: '',
-    mainImg:
-      'https://cdn.vox-cdn.com/uploads/chorus_image/image/55159829/12.0.jpg',
+    mainImg: 'http://kaijupop.com/wp-content/uploads/2014/04/KWsub.png',
     desc: '',
     children: null,
   }

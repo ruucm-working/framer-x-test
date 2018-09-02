@@ -23,9 +23,9 @@ const Label = styled.div`
   top: 0;
   z-index: 1;
 `
-const Child = styled.div`
-  position: absolute;
-  top: 0;
+const ChildFrame = styled(Frame)`
+  left: 50%;
+  transform: translateX(-50%) !important;
 `
 
 // Define type of property
@@ -33,80 +33,85 @@ interface Props {
   text: string
 }
 
+const screenWidth = 375
 export class Animate extends React.Component<Props> {
   // Set default properties
   static defaultProps = {
     text: 'Animate',
 
+    firstWidth: 100,
+
     onTapLeft: 50,
     onTapTop: 50,
-    onTapScale: 150,
 
     onMDLeft: 50,
     onMDTop: 50,
-    onMDScale: 150,
+    onMDWidth: 70,
 
     onMULeft: 50,
     onMUTop: 50,
-    onMUScale: 150,
+    onMUWidth: 90,
 
     tension: 500,
     friction: 100,
     children: null,
   }
 
-  switch = PropertyStore({ left: 0, top: 0, scale: 1 }, true)
-
   // Items shown in property panel
   static propertyControls: PropertyControls = {
     text: { type: ControlType.String, title: 'Text' },
+    firstWidth: { type: ControlType.Number, title: 'First Width' },
 
     onTapLeft: { type: ControlType.Number, title: 'onTap X' },
     onTapTop: { type: ControlType.Number, title: 'onTap Y' },
-    onTapScale: { type: ControlType.Number, title: 'onTap Scale' },
 
     onMDLeft: { type: ControlType.Number, title: 'onMD X' },
     onMDTop: { type: ControlType.Number, title: 'onMD Y' },
-    onMDScale: { type: ControlType.Number, title: 'onMD Scale' },
+    onMDWidth: { type: ControlType.Number, title: 'onMD Width' },
 
     onMULeft: { type: ControlType.Number, title: 'onMU X' },
     onMUTop: { type: ControlType.Number, title: 'onMU Y' },
-    onMUScale: { type: ControlType.Number, title: 'onMU Scale' },
+    onMUWidth: { type: ControlType.Number, title: 'onMU Width' },
   }
+
+  switch = PropertyStore(
+    { left: 0, top: 0, width: screenWidth * (this.props.firstWidth / 100) },
+    true
+  )
 
   componentWillReceiveProps(nextProps) {
     // Play onTap Animation
-    if (nextProps.playingOnTap !== this.props.playingOnTap) {
-      let left
-      let top
-      let scale
-      let springOptions = {
-        tension: this.props.tension,
-        friction: this.props.friction,
-      }
+    // if (nextProps.playingOnTap !== this.props.playingOnTap) {
+    //   let left
+    //   let top
+    //   let scale
+    //   let springOptions = {
+    //     tension: this.props.tension,
+    //     friction: this.props.friction,
+    //   }
 
-      if (nextProps.playingOnTap) {
-        log('play playingOnTap!')
+    //   if (nextProps.playingOnTap) {
+    //     log('play playingOnTap!')
 
-        left = this.props.onTapLeft
-        top = this.props.onTapTop
-        scale = this.props.onTapScale / 100
+    //     left = this.props.onTapLeft
+    //     top = this.props.onTapTop
+    //     scale = this.props.onTapScale / 100
 
-        animate.spring(this.switch, { left, top, scale }, springOptions)
-      } else {
-        log('reverse playingOnTap!')
-        left = 0
-        top = 0
-        scale = 1
-        animate.spring(this.switch, { left, top, scale }, springOptions)
-      }
-    }
+    //     animate.spring(this.switch, { left, top, scale }, springOptions)
+    //   } else {
+    //     log('reverse playingOnTap!')
+    //     left = 0
+    //     top = 0
+    //     scale = 1
+    //     animate.spring(this.switch, { left, top, scale }, springOptions)
+    //   }
+    // }
 
     // Play onMouseDown Animation
     if (nextProps.playingOnMouseDown !== this.props.playingOnMouseDown) {
       let left
       let top
-      let scale
+      let width
       let springOptions = {
         tension: this.props.tension,
         friction: this.props.friction,
@@ -116,15 +121,16 @@ export class Animate extends React.Component<Props> {
 
         left = this.props.onMDLeft
         top = this.props.onMDTop
-        scale = this.props.onMDScale / 100
+        width = (screenWidth * this.props.onMDWidth) / 100
 
-        animate.spring(this.switch, { left, top, scale }, springOptions)
+        animate.spring(this.switch, { left, top, width }, springOptions)
       } else {
         log('reverse playingOnMouseDown!')
         left = 0
         top = 0
-        scale = 1
-        animate.spring(this.switch, { left, top, scale }, springOptions)
+        width = (screenWidth * this.props.firstWidth) / 100
+        log('this.props', this.props)
+        animate.spring(this.switch, { left, top, width }, springOptions)
       }
     }
 
@@ -132,7 +138,7 @@ export class Animate extends React.Component<Props> {
     if (nextProps.playingOnMouseUp !== this.props.playingOnMouseUp) {
       let left
       let top
-      let scale
+      let width
       let springOptions = {
         tension: this.props.tension,
         friction: this.props.friction,
@@ -142,15 +148,17 @@ export class Animate extends React.Component<Props> {
 
         left = this.props.onMULeft
         top = this.props.onMUTop
-        scale = this.props.onMUScale / 100
+        width = (screenWidth * this.props.onMUWidth) / 100
 
-        animate.spring(this.switch, { left, top, scale }, springOptions)
+        log('width', width)
+
+        animate.spring(this.switch, { left, top, width }, springOptions)
       } else {
         log('reverse playingOnMouseUp!')
         left = 0
         top = 0
-        scale = 1
-        animate.spring(this.switch, { left, top, scale }, springOptions)
+        width = (screenWidth * this.props.firstWidth) / 100
+        animate.spring(this.switch, { left, top, width }, springOptions)
       }
     }
   }
@@ -160,7 +168,6 @@ export class Animate extends React.Component<Props> {
       <AnimateFrame
         bg={this.props.bg}
         onTap={this.props.onTap}
-        scale={this.switch.scale}
         left={this.switch.left}
         top={this.switch.top}
         style={{
@@ -168,15 +175,15 @@ export class Animate extends React.Component<Props> {
         }}
       >
         <Label>{this.props.text}</Label>
-        <Child>
+        <ChildFrame width={this.switch.width} height={400}>
           {React.Children.map(this.props.children, child => {
             // let newChildProps = {
             //   playing: this.props.playing,
             //   width: this.props.width,
             // }
-            return React.cloneElement(child)
+            return child.props.children
           })}
-        </Child>
+        </ChildFrame>
       </AnimateFrame>
     )
   }
