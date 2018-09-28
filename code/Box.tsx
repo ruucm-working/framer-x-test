@@ -1,42 +1,20 @@
 import * as React from 'react'
 
-import {
-  Frame,
-  animate,
-  Animatable,
-  PropertyControls,
-  ControlType,
-  FramerAnimation,
-  PropertyStore,
-  RenderTarget,
-} from 'framer'
+import { Frame, PropertyControls, ControlType } from 'framer'
 
 import styled, { css } from 'styled-components'
 import { log } from 'ruucm-util'
-
-// import { constants } from '../toolbox'
-
-// const { color, animation } = constants
-// const { fadeIn, fadeOut } = animation
 
 const Wrap = styled.div`
   position: relative;
 
   width: 100% !important;
   height: 100% !important;
+
   ${props =>
-    props.isShowing &&
+    props.src &&
     css`
-      ${MainImg} {
-        border-radius: 0;
-      }
-    `};
-  ${props =>
-    props.focused &&
-    css`
-      ${MainImg} {
-        height: 700px !important;
-      }
+      background: center / cover no-repeat url(${props.src});
     `};
 `
 const Label = styled.div`
@@ -54,25 +32,15 @@ const Title = styled.div`
   font-weight: 900;
 `
 
-const StyledFrame = styled(Frame)`
-  position: absolute;
-  top: 0;
-  z-index: -1;
-  width: 100% !important;
-`
 const MainImg = styled(Frame)`
   position: relative !important;
   margin: 0 auto;
   transform: none !important;
-  border-radius: 20px;
-  -moz-transition: border-radius 2s;
-  -o-transition: border-radius 2s;
-  -webkit-transition: border-radius 2s;
-  transition: border-radius 2s;
 
   width: 100% !important;
   height: 100% !important;
   padding: 25px;
+  background: transparent !important;
   ${props =>
     props.src &&
     css`
@@ -124,41 +92,12 @@ export class Box extends React.Component<Props> {
     desc: { type: ControlType.String, title: 'Description' },
     children: { type: ControlType.Children, title: 'Children' },
   }
-  screenWidth = 375
-  top = Animatable(0)
-  left = Animatable(0)
-  scale = Animatable(1)
-  opacity = Animatable(0)
-  width = Animatable(this.screenWidth * 0.9)
-
-  // componentDidMount() {
-  //   log('window.screen', window.screen)
-  //   log('screen', screen)
-  //   log('screen.width * 0.9', screen.width * 0.9)
-  // }
-
-  shrink = async () => {
-    animate(this.width, this.screenWidth * 0.76).finished
-  }
-
-  showDetail = async () => {
-    animate(this.top, -100).finished
-    animate(this.width, this.screenWidth * 1).finished
-    this.setState({ show: true })
-    animate(this.opacity, 1).finished
-  }
-  closeDetail = async () => {
-    animate(this.opacity, 0).finished
-    this.setState({ show: false })
-    animate(this.top, 0).finished
-    animate(this.width, this.screenWidth * 0.9).finished
-  }
 
   render() {
     return (
-      <Wrap>
+      <Wrap src={this.props.mainImg}>
         {/* <CloseButton onClick={this.closeDetail}>close</CloseButton> */}
-        <MainImg src={this.props.mainImg}>
+        <MainImg>
           <Label>{this.props.label}</Label>
           <Title
             dangerouslySetInnerHTML={{

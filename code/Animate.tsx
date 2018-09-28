@@ -9,6 +9,7 @@ import {
 } from 'framer'
 import styled, { css } from 'styled-components'
 import { log } from 'ruucm-util'
+import { TweenMax, Elastic, Power1, Power3, Power4 } from 'gsap'
 
 const AnimateFrame = styled(Frame)`
   width: 100% !important;
@@ -28,6 +29,9 @@ const ChildFrame = styled(Frame)`
   transform: translateX(-50%) !important;
   /* Don't want to animate height yet */
   height: 100% !important;
+  border-radius: 20px;
+  background: rebeccapurple;
+  overflow: hidden;
 `
 
 // Define type of property
@@ -43,15 +47,15 @@ export class Animate extends React.Component<Props> {
 
     firstWidth: 100,
 
-    onTapLeft: 50,
-    onTapTop: 50,
+    onTapLeft: 0,
+    onTapTop: 0,
 
-    onMDLeft: 50,
-    onMDTop: 50,
+    onMDLeft: 0,
+    onMDTop: 0,
     onMDWidth: 70,
 
-    onMULeft: 50,
-    onMUTop: 50,
+    onMULeft: 0,
+    onMUTop: 0,
     onMUWidth: 90,
 
     tension: 500,
@@ -87,31 +91,31 @@ export class Animate extends React.Component<Props> {
 
   componentWillReceiveProps(nextProps) {
     // Play onTap Animation
-    // if (nextProps.playingOnTap !== this.props.playingOnTap) {
-    //   let left
-    //   let top
-    //   let scale
-    //   let springOptions = {
-    //     tension: this.props.tension,
-    //     friction: this.props.friction,
-    //   }
+    if (nextProps.playingOnTap !== this.props.playingOnTap) {
+      let left
+      let top
+      let scale
+      let springOptions = {
+        tension: this.props.tension,
+        friction: this.props.friction,
+      }
 
-    //   if (nextProps.playingOnTap) {
-    //     log('play playingOnTap!')
+      if (nextProps.playingOnTap) {
+        log('play playingOnTap!')
 
-    //     left = this.props.onTapLeft
-    //     top = this.props.onTapTop
-    //     scale = this.props.onTapScale / 100
+        left = this.props.onTapLeft
+        top = this.props.onTapTop
+        scale = this.props.onTapScale / 100
 
-    //     animate.spring(this.switch, { left, top, scale }, springOptions)
-    //   } else {
-    //     log('reverse playingOnTap!')
-    //     left = 0
-    //     top = 0
-    //     scale = 1
-    //     animate.spring(this.switch, { left, top, scale }, springOptions)
-    //   }
-    // }
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      } else {
+        log('reverse playingOnTap!')
+        left = 0
+        top = 0
+        scale = 1
+        animate.spring(this.switch, { left, top, scale }, springOptions)
+      }
+    }
 
     // Play onMouseDown Animation
     if (nextProps.playingOnMouseDown !== this.props.playingOnMouseDown) {
@@ -155,10 +159,12 @@ export class Animate extends React.Component<Props> {
         left = this.props.onMULeft
         top = this.props.onMUTop
         width = (screenWidth * this.props.onMUWidth) / 100
-
-        log('width', width)
-
         animate.spring(this.switch, { left, top, width }, springOptions)
+
+        var myChild = document.getElementById('my-child')
+        TweenMax.to(myChild, 2, {
+          borderRadius: '0px',
+        })
       } else {
         log('reverse playingOnMouseUp!')
         left = 0
@@ -181,12 +187,8 @@ export class Animate extends React.Component<Props> {
         }}
       >
         <Label>{this.props.text}</Label>
-        <ChildFrame width={this.switch.width}>
+        <ChildFrame id="my-child" width={this.switch.width}>
           {React.Children.map(this.props.children, child => {
-            // let newChildProps = {
-            //   playing: this.props.playing,
-            //   width: this.props.width,
-            // }
             return child.props.children
           })}
         </ChildFrame>

@@ -31,9 +31,9 @@ export class Trigger extends React.Component<Props> {
   static defaultProps = {
     text: 'Trigger',
     playType: 'toggle',
-    onTapTrigger: true,
-    onMouseDownTrigger: false,
-    onMouseUpTrigger: false,
+    onTapTrigger: false,
+    onMouseDownTrigger: true,
+    onMouseUpTrigger: true,
     visibility: true,
   }
 
