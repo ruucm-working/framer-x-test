@@ -10,9 +10,33 @@
     prop-types "^15.6.2"
     react-lottie "^1.2.3"
 
+"@framer/benjamin.grid@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.framer.com/@framer/benjamin.grid/-/@framer/benjamin.grid-1.8.0.tgz#93dcb4945189a64e7d270f35503457a3eb7b8b8c"
+  dependencies:
+    "@types/react" "^16.0.31"
+    react "^16.3.0"
+    react-dom "^16.3.0"
+
+"@framer/edoardo.ios-kit@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.framer.com/@framer/edoardo.ios-kit/-/@framer/edoardo.ios-kit-1.3.0.tgz#eb4276e3c113635430abb2bbdf794b15c977e991"
+
+"@framer/framer.device-hand-iphone-1@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.framer.com/@framer/framer.device-hand-iphone-1/-/@framer/framer.device-hand-iphone-1-1.0.0.tgz#0fbfd5313694b8834b91b138c9a961e59cfea1fd"
+
+"@framer/framer.device-hand-iphone-2@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.framer.com/@framer/framer.device-hand-iphone-2/-/@framer/framer.device-hand-iphone-2-1.0.0.tgz#201c6b49236e837f931d0240cb434e396151d4f0"
+
 "@framer/framer.device-skin-apple-iphone8-gold@^1.0.0":
   version "1.0.0"
   resolved "https://registry.framer.com/@framer/framer.device-skin-apple-iphone8-gold/-/@framer/framer.device-skin-apple-iphone8-gold-1.0.0.tgz#698d4b10e247e66d849e0ba5df0c457dc14cea0b"
+
+"@framer/framer.device-skin-apple-iphone8-space-gray@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.framer.com/@framer/framer.device-skin-apple-iphone8-space-gray/-/@framer/framer.device-skin-apple-iphone8-space-gray-1.0.0.tgz#336e100533d33e4fc7cd10507ccf64a8bc96637a"
 
 "@framer/framer.examples@^1.4.0":
   version "1.4.0"
@@ -328,6 +352,15 @@ react-dom@15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-dom@^16.3.0:
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.5.0"
+
 react-is@^16.3.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
@@ -380,6 +413,15 @@ react@15.5.4:
     object-assign "^4.1.0"
     prop-types "^15.5.7"
 
+react@^16.3.0:
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.5.0"
+
 recompose@^0.27.1:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
@@ -431,6 +473,12 @@ ruucm-util@^0.11.0:
 "safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+
+schedule@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
+  dependencies:
+    object-assign "^4.1.1"
 
 setimmediate@^1.0.5:
   version "1.0.5"

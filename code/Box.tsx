@@ -9,7 +9,7 @@ const Wrap = styled.div`
   position: relative;
 
   width: 100% !important;
-  height: 100% !important;
+  /* height: 100% !important; */
 
   ${props =>
     props.src &&
@@ -106,7 +106,12 @@ export class Box extends React.Component<Props> {
           />
           <Child>{this.props.children}</Child>
         </MainImg>
-        {/* <Desc>{this.props.desc}</Desc> */}
+
+        {this.props.playingOnMouseUp ? (
+          <Desc>{this.props.desc}</Desc>
+        ) : (
+          <h1>falssse</h1>
+        )}
       </Wrap>
     )
   }
