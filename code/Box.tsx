@@ -9,12 +9,29 @@ const Wrap = styled.div`
   position: relative;
 
   width: 100% !important;
-  /* height: 100% !important; */
+  max-height: 100% !important;
+  height: 100% !important;
+  transition: max-height 0.6s ease-out;
 
   ${props =>
     props.src &&
     css`
       background: center / cover no-repeat url(${props.src});
+    `};
+
+  ${props =>
+    props.opened &&
+    css`
+      max-height: 80% !important;
+      height: 80% !important;
+      transition: max-height 2s ease-in;
+      ${Desc} {
+        background: red !important;
+        height: 20vh;
+        max-height: 20vh;
+        bottom: -20vh;
+        transition: max-height 2s ease-in, height 2s ease-in, bottom 3s ease-in;
+      }
     `};
 `
 const Label = styled.div`
@@ -49,7 +66,13 @@ const MainImg = styled(Frame)`
 `
 
 const Desc = styled.div`
-  background: white;
+  position: absolute;
+  z-index: 1;
+  bottom: 10vh;
+  background: rebeccapurple;
+  height: 0;
+  max-height: 0;
+  transition: max-height 0.6s ease-in, height 2s ease-in, bottom 3s ease-in;
 `
 const CloseButton = styled.button`
   position: absolute;
@@ -95,7 +118,7 @@ export class Box extends React.Component<Props> {
 
   render() {
     return (
-      <Wrap src={this.props.mainImg}>
+      <Wrap src={this.props.mainImg} opened={this.props.playingOnMouseUp}>
         {/* <CloseButton onClick={this.closeDetail}>close</CloseButton> */}
         <MainImg>
           <Label>{this.props.label}</Label>
@@ -106,12 +129,7 @@ export class Box extends React.Component<Props> {
           />
           <Child>{this.props.children}</Child>
         </MainImg>
-
-        {this.props.playingOnMouseUp ? (
-          <Desc>{this.props.desc}</Desc>
-        ) : (
-          <h1>falssse</h1>
-        )}
+        <Desc>{this.props.desc}</Desc>
       </Wrap>
     )
   }
