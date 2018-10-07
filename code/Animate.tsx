@@ -34,7 +34,7 @@ const ChildFrame = styled(Frame)`
   height: 100%;
   border-radius: 20px;
   background: rebeccapurple;
-  overflow: hidden;
+  overflow: scroll;
 `
 
 // Define type of property
@@ -222,7 +222,7 @@ export class Animate extends React.Component<Props> {
           {React.Children.map(this.props.children, child => {
             let hey = React.cloneElement(child.props.children, otherProps)
             // log('child.props.children', child.props.children)
-            log('hey', hey)
+            // log('hey', hey)
             // return hey != undefined ? hey : <div />
             // return React.cloneElement(child, otherProps)
 

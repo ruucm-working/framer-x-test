@@ -27,10 +27,11 @@ const Wrap = styled.div`
       transition: max-height 2s ease-in;
       ${Desc} {
         background: red !important;
-        height: 20vh;
-        max-height: 20vh;
-        bottom: -20vh;
-        transition: max-height 2s ease-in, height 2s ease-in, bottom 3s ease-in;
+        /* height: 20vh; */
+        /* max-height: 20vh; */
+        bottom: initial;
+        /* transition: max-height 2s ease-in, height 2s ease-in, bottom 3s ease-in; */
+        transition: bottom 3s ease-in;
       }
     `};
 `
@@ -68,11 +69,11 @@ const MainImg = styled(Frame)`
 const Desc = styled.div`
   position: absolute;
   z-index: 1;
-  bottom: 10vh;
+  bottom: 0vh;
   background: rebeccapurple;
-  height: 0;
-  max-height: 0;
-  transition: max-height 0.6s ease-in, height 2s ease-in, bottom 3s ease-in;
+  /* height: 0; */
+  /* max-height: 0; */
+  transition: bottom 3s ease-in;
 `
 const CloseButton = styled.button`
   position: absolute;
