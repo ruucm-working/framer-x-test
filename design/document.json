@@ -6367,6 +6367,7 @@
         "codeComponentIdentifier" : ".\/Box.tsx_Box",
         "codeComponentProps" : {
           "children" : "mtYoMNAB0",
+          "closeButtonImg" : "https:\/\/github.com\/ruucm-working\/my-files\/blob\/master\/close-btn.png?raw=true",
           "desc" : "",
           "label" : "",
           "mainImg" : "https:\/\/cdn.vox-cdn.com\/uploads\/chorus_image\/image\/55159829\/12.0.jpg",
@@ -7529,6 +7530,7 @@
         "codeComponentIdentifier" : ".\/Box.tsx_Box",
         "codeComponentProps" : {
           "children" : "BSVGt6vUg",
+          "closeButtonImg" : "https:\/\/github.com\/ruucm-working\/my-files\/blob\/master\/close-btn.png?raw=true",
           "desc" : "<strong>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<\/strong> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type sLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type s",
           "label" : "WOLRD PREMIER",
           "mainImg" : "http:\/\/kaijupop.com\/wp-content\/uploads\/2014\/04\/KWsub.png",
@@ -7625,7 +7627,7 @@
           "onMouseDownTrigger" : true,
           "onMouseUpTrigger" : true,
           "onTapTrigger" : false,
-          "playType" : "toggle",
+          "playType" : "play",
           "text" : "Trigger",
           "visibility" : false
         },
@@ -8623,7 +8625,6 @@
               "paddingPerSide" : false,
               "paddingRight" : 0,
               "paddingTop" : 0,
-              "placeholders" : null,
               "slideIndex" : 0,
               "speed" : 200,
               "wrapAround" : false
@@ -9015,8 +9016,7 @@
               "paddingLeft" : 0,
               "paddingPerSide" : false,
               "paddingRight" : 0,
-              "paddingTop" : 0,
-              "placeholders" : null
+              "paddingTop" : 0
             },
             "codeOverrideEnabled" : true,
             "codeOverrideFile" : ".\/App.ts",

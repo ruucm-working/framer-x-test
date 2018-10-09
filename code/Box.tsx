@@ -32,6 +32,9 @@ const Wrap = styled.div`
         opacity: 1;
         transition: bottom 0s ease-in;
       }
+      ${CloseButton} {
+        display: block;
+      }
     `};
 `
 
@@ -82,9 +85,19 @@ const MainImg = styled(Frame)`
       background: center / cover no-repeat url(${props.src});
     `};
 `
-const CloseButton = styled.button`
+const CloseButton = styled.div`
   position: absolute;
-  right: 0;
+  right: 18px;
+  top: 18px;
+  width: 25px !important;
+  height: 25px !important;
+  display: none;
+  cursor: pointer;
+  ${props =>
+    props.src &&
+    css`
+      background: center / cover no-repeat url(${props.src});
+    `};
 `
 const Child = styled.div`
   position: absolute;
@@ -111,6 +124,8 @@ export class Box extends React.Component<Props> {
     title: '',
     label: '',
     mainImg: 'http://kaijupop.com/wp-content/uploads/2014/04/KWsub.png',
+    closeButtonImg:
+      'https://github.com/ruucm-working/my-files/blob/master/close-btn.png?raw=true',
     desc: '',
     children: null,
   }
@@ -120,14 +135,16 @@ export class Box extends React.Component<Props> {
     title: { type: ControlType.String, title: 'Title' },
     label: { type: ControlType.String, title: 'Label' },
     mainImg: { type: ControlType.String, title: 'Main Image' },
+    closeButtonImg: { type: ControlType.String, title: 'CloseButton Image' },
     desc: { type: ControlType.String, title: 'Description' },
     children: { type: ControlType.Children, title: 'Children' },
+    children2: { type: ControlType.Children, title: 'Children2' },
   }
 
   render() {
     return (
       <Wrap src={this.props.mainImg} opened={this.props.playingOnMouseUp}>
-        {/* <CloseButton onClick={this.closeDetail}>close</CloseButton> */}
+        <CloseButton src={this.props.closeButtonImg} />
         <MainImg>
           <Label>{this.props.label}</Label>
           <Title
