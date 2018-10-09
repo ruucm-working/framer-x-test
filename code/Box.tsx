@@ -11,7 +11,7 @@ const Wrap = styled.div`
   width: 100% !important;
   max-height: 100% !important;
   height: 100% !important;
-  transition: max-height 0.6s ease-out;
+  transition: max-height 1s ease-in;
 
   ${props =>
     props.src &&
@@ -24,17 +24,34 @@ const Wrap = styled.div`
     css`
       max-height: 80% !important;
       height: 80% !important;
-      transition: max-height 2s ease-in;
+      transition: max-height 10s ease-in;
       ${Desc} {
-        background: red !important;
-        /* height: 20vh; */
-        /* max-height: 20vh; */
-        bottom: initial;
-        /* transition: max-height 2s ease-in, height 2s ease-in, bottom 3s ease-in; */
-        transition: bottom 3s ease-in;
+        background: white !important;
+        /* This bottom value differs as 'Desc' Contents height change */
+        bottom: -580px;
+        opacity: 1;
+        transition: bottom 0s ease-in;
       }
     `};
 `
+
+const Desc = styled.div`
+  padding: 0 20px;
+  padding-bottom: 40px;
+  text-align: justify;
+  font-size: 20px;
+  color: #8b8b8b;
+  position: absolute;
+  z-index: -1;
+  bottom: 0vh;
+  background: rebeccapurple;
+  opacity: 0;
+  transition: bottom 1s ease-in, opacity 2s ease-in;
+  strong {
+    color: #080808;
+  }
+`
+
 const Label = styled.div`
   font-family: Helvetica;
   color: rgba(0, 0, 0, 0.35);
@@ -64,16 +81,6 @@ const MainImg = styled(Frame)`
     css`
       background: center / cover no-repeat url(${props.src});
     `};
-`
-
-const Desc = styled.div`
-  position: absolute;
-  z-index: 1;
-  bottom: 0vh;
-  background: rebeccapurple;
-  /* height: 0; */
-  /* max-height: 0; */
-  transition: bottom 3s ease-in;
 `
 const CloseButton = styled.button`
   position: absolute;
@@ -130,7 +137,11 @@ export class Box extends React.Component<Props> {
           />
           <Child>{this.props.children}</Child>
         </MainImg>
-        <Desc>{this.props.desc}</Desc>
+        <Desc
+          dangerouslySetInnerHTML={{
+            __html: this.props.desc,
+          }}
+        />
       </Wrap>
     )
   }
