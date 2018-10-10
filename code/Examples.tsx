@@ -1,6 +1,6 @@
 import { Data, animate, Override, Animatable } from "framer"
 
-const data = Data({ toggle: true, scale: Animatable(1), opacity: Animatable(1), rotation: Animatable(0) })
+const data = Data({ toggle: true, scale: Animatable(1), opacity: Animatable(1), rotation: Animatable(0), rotationY: Animatable(0) })
 
 export const Scale: Override = () => {
     return {
@@ -37,22 +37,20 @@ export const Fade: Override = props => {
     }
 }
 
-export const SwitchOutput: Override = () => {
+export const FlipOutput: Override = () => {
     return {
-        opacity: data.opacity,
-        rotation: data.rotation,
+        rotationY: data.rotationY,
     }
 }
 
-export const SwitchInput: Override = () => {
+export const FlipInput: Override = () => {
     return {
         onTap() {
             const toggle = data.toggle
             animate.spring(
-                { opacity: data.opacity, rotation: data.rotation },
+                { rotationY: data.rotationY },
                 {
-                    opacity: toggle ? 0.5 : 1,
-                    rotation: toggle ? 360 : 0,
+                    rotationY: toggle ? 360 : 0,
                 },
                 { tension: 200, friction: 20 }
             )
