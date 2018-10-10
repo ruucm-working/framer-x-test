@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { PropertyControls, ControlType, Frame } from 'framer'
 import styled, { css } from 'styled-components'
+import { log } from 'ruucm-util'
 
 const TriggerFrame = styled(Frame)`
   width: 100% !important;
@@ -17,8 +18,16 @@ const TriggerFrame = styled(Frame)`
   ${props =>
     !props.visibility &&
     css`
-      opacity: 0.3;
+      background: rgba(117, 190, 142, 0.3) !important;
     `};
+`
+const Child = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: scroll;
 `
 
 // Define type of property
@@ -35,6 +44,7 @@ export class Trigger extends React.Component<Props> {
     onMouseDownTrigger: true,
     onMouseUpTrigger: true,
     visibility: true,
+    children: null,
   }
 
   // Items shown in property panel
@@ -56,9 +66,13 @@ export class Trigger extends React.Component<Props> {
       type: ControlType.Boolean,
       title: 'Visibility',
     },
+    children: { type: ControlType.Children, title: 'Children' },
   }
 
   render() {
+    const otherProps = Object.assign({}, this.props)
+    delete otherProps.children
+
     return (
       <TriggerFrame
         onTap={() =>
@@ -79,6 +93,11 @@ export class Trigger extends React.Component<Props> {
         visibility={this.props.visibility}
       >
         {this.props.playType}
+        <Child>
+          {React.Children.map(this.props.children, child => {
+            return React.cloneElement(child, otherProps)
+          })}
+        </Child>
       </TriggerFrame>
     )
   }

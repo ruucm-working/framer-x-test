@@ -28,7 +28,7 @@ const Wrap = styled.div`
       ${Desc} {
         background: white !important;
         /* This bottom value differs as 'Desc' Contents height change */
-        bottom: -580px;
+        bottom: -540px;
         opacity: 1;
         transition: bottom 0s ease-in;
       }
@@ -93,6 +93,7 @@ const CloseButton = styled.div`
   height: 25px !important;
   display: none;
   cursor: pointer;
+  z-index: 1;
   ${props =>
     props.src &&
     css`
@@ -138,13 +139,19 @@ export class Box extends React.Component<Props> {
     closeButtonImg: { type: ControlType.String, title: 'CloseButton Image' },
     desc: { type: ControlType.String, title: 'Description' },
     children: { type: ControlType.Children, title: 'Children' },
-    children2: { type: ControlType.Children, title: 'Children2' },
   }
 
   render() {
     return (
       <Wrap src={this.props.mainImg} opened={this.props.playingOnMouseUp}>
-        <CloseButton src={this.props.closeButtonImg} />
+        <CloseButton
+          src={this.props.closeButtonImg}
+          onClick={e => {
+            e.stopPropagation()
+            this.props.onMouseDown('reverse')
+            this.props.onMouseUp('reverse')
+          }}
+        />
         <MainImg>
           <Label>{this.props.label}</Label>
           <Title

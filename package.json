@@ -19,11 +19,9 @@
 	},
 	"author": ". ruucm",
 	"dependencies": {
-		"@framer/airbnb.lottie": "^1.1.0",
 		"@framer/benjamin.grid": "^1.8.0",
 		"@framer/edoardo.ios-kit": "^1.3.0",
 		"@framer/framer.examples": "^1.4.0",
-		"@framer/jacopomoretto.carousel": "^1.10.0",
 		"@framer/koenbok.signature": "^1.4.0",
 		"gsap": "^2.0.2",
 		"nuka-carousel": "^4.3.7",

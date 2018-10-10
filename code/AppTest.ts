@@ -21,6 +21,9 @@ export const Animate: Override = () => {
 
 export const Trigger: Override = () => {
   return {
+    playingOnTap: data.playingOnTap,
+    playingOnMouseDown: data.playingOnMouseDown,
+    playingOnMouseUp: data.playingOnMouseUp,
     onTap(type) {
       log('onTap')
       if (type == 'play') data.playingOnTap = true
