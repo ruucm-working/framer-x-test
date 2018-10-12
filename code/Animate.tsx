@@ -32,9 +32,13 @@ const ChildFrame = styled(Frame)`
   box-shadow: -5px 8px 40px 0px rgba(0, 0, 0, 0.3);
   /* Don't want to animate height yet */
   height: 100%;
-  border-radius: 20px;
   background: rebeccapurple;
   overflow: scroll;
+  ${props =>
+    props.borderRadius &&
+    css`
+      border-radius: ${props.borderRadius + 'px'};
+    `};
 `
 
 // Define type of property
@@ -51,6 +55,7 @@ export class Animate extends React.Component<Props> {
 
     firstWidth: 100,
     firstHeight: 70,
+    firstBorderRadius: 20,
 
     onTapLeft: 0,
     onTapTop: 0,
@@ -64,6 +69,7 @@ export class Animate extends React.Component<Props> {
     onMUTop: 0,
     onMUWidth: 90,
     onMUHeight: 100,
+    onMUBorderRadius: 0,
 
     tension: 500,
     friction: 50,
@@ -75,6 +81,10 @@ export class Animate extends React.Component<Props> {
     text: { type: ControlType.String, title: 'Text' },
     firstWidth: { type: ControlType.Number, title: 'First Width' },
     firstHeight: { type: ControlType.Number, title: 'First Height' },
+    firstBorderRadius: {
+      type: ControlType.Number,
+      title: 'First BorderRadius',
+    },
 
     onTapLeft: { type: ControlType.Number, title: 'onTap X' },
     onTapTop: { type: ControlType.Number, title: 'onTap Y' },
@@ -88,6 +98,7 @@ export class Animate extends React.Component<Props> {
     onMUTop: { type: ControlType.Number, title: 'onMU Y' },
     onMUWidth: { type: ControlType.Number, title: 'onMU Width' },
     onMUHeight: { type: ControlType.Number, title: 'onMU Height' },
+    onMUBorderRadius: { type: ControlType.Number, title: 'onMU BorderRadius' },
   }
 
   switch = PropertyStore(
@@ -180,7 +191,7 @@ export class Animate extends React.Component<Props> {
         // Border Radius Anim (using gsap)
         var myChild = document.getElementById('my-child')
         TweenMax.to(myChild, 1, {
-          borderRadius: '0px',
+          borderRadius: this.props.onMUBorderRadius + 'px',
         })
       } else {
         log('reverse playingOnMouseUp!')
@@ -193,7 +204,7 @@ export class Animate extends React.Component<Props> {
         // Border Radius Anim (using gsap)
         var myChild = document.getElementById('my-child')
         TweenMax.to(myChild, 1, {
-          borderRadius: '20px',
+          borderRadius: this.props.firstBorderRadius + 'px',
         })
       }
     }
@@ -218,6 +229,7 @@ export class Animate extends React.Component<Props> {
           id="my-child"
           width={this.switch.width}
           height={this.switch.height}
+          borderRadius={this.props.firstBorderRadius}
         >
           {React.Children.map(this.props.children, child => {
             let hey = React.cloneElement(child.props.children, otherProps)
