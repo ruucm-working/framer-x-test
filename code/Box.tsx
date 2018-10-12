@@ -100,14 +100,6 @@ const CloseButton = styled.div`
       background: center / cover no-repeat url(${props.src});
     `};
 `
-const Child = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-`
-
 // Define type of property
 interface Props {
   title: string
@@ -128,7 +120,6 @@ export class Box extends React.Component<Props> {
     closeButtonImg:
       'https://github.com/ruucm-working/my-files/blob/master/close-btn.png?raw=true',
     desc: '',
-    children: null,
   }
 
   // Items shown in property panel
@@ -138,7 +129,6 @@ export class Box extends React.Component<Props> {
     mainImg: { type: ControlType.String, title: 'Main Image' },
     closeButtonImg: { type: ControlType.String, title: 'CloseButton Image' },
     desc: { type: ControlType.String, title: 'Description' },
-    children: { type: ControlType.Children, title: 'Children' },
   }
 
   render() {
@@ -159,7 +149,6 @@ export class Box extends React.Component<Props> {
               __html: this.props.title,
             }}
           />
-          <Child>{this.props.children}</Child>
         </MainImg>
         <Desc
           dangerouslySetInnerHTML={{
